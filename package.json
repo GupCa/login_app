@@ -7,7 +7,7 @@
     },
     "scripts": {
         "build": "webpack --mode production",
-        "start": "webpack-dev-server --mode development --open"
+        "start": "webpack-dev-server --port=8081 --mode development --open"
     },
     "license": "MIT",
     "dependencies": {
