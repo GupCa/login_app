@@ -35,16 +35,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    return this.http.post<any>(`${config.userApiUrl}/logout`, {}).pipe(
-      map(() => {
-        // remove user from local storage and set current user to null
-        this.removeUser();
-      })
-    );
+    localStorage.removeItem("currentUser");
+    this.currentUserSubject.next(null);
   }
-
-    removeUser() {
-        localStorage.removeItem("currentUser");
-        this.currentUserSubject.next(null);
-    }
 }
