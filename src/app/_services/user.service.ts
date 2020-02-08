@@ -8,14 +8,14 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get<User[]>(`${config.apiUrl}/users`);
+        return this.http.get<User[]>(`${config.userApiUrl}/users`);
     }
 
     register(user: User) {
-        return this.http.post(`${config.apiUrl}/users/register`, user);
+        return this.http.post(`${config.userApiUrl}/register`, user);
     }
 
     delete(id: number) {
-        return this.http.delete(`${config.apiUrl}/users/${id}`);
+        return this.http.delete(`${config.userApiUrl}/users/${id}`);
     }
 }
