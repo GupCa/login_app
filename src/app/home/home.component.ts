@@ -1,13 +1,14 @@
 ﻿import { Component, OnInit } from "@angular/core";
-import { first } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 import { User } from "@/_models";
 import { UserService, AuthenticationService, TaskService } from "@/_services";
+import { Observable } from "rxjs";
 
 @Component({ templateUrl: "home.component.html" })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  data = {};
+  data$: Observable<any>;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -21,9 +22,10 @@ export class HomeComponent implements OnInit {
   }
 
   private simpleCall() {
-    this.taskService
-      .getTask()
-      .pipe(first())
-      .subscribe(data => (this.data = data));
+    this.data$ = this.taskService.getTask().pipe(
+      map(data => {
+        return JSON.stringify(data);
+      })
+    );
   }
 }
